@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Delete
 import org.unizd.rma.markanjevic.models.Animal
-
 @Dao
 interface AnimalDao {
 
@@ -20,4 +20,7 @@ interface AnimalDao {
     // Get an animal by its ID
     @Query("SELECT * FROM animals WHERE id = :id")
     fun getAnimalById(id: Int): LiveData<Animal>
+
+    @Delete
+    suspend fun deleteAnimal(animal: Animal)
 }

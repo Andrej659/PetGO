@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +13,7 @@ import androidx.room.Room
 import com.bumptech.glide.Glide
 import org.unizd.rma.markanjevic.R
 import org.unizd.rma.markanjevic.database.AppDatabase
+import org.unizd.rma.markanjevic.models.Animal
 import org.unizd.rma.markanjevic.viewmodels.AnimalViewModel
 import org.unizd.rma.markanjevic.viewmodels.factory.AnimalViewModelFactory
 
@@ -20,7 +22,7 @@ class PetDetailFragment : Fragment() {
 
     private var animalId: Int = 0
     private lateinit var animalViewModel: AnimalViewModel
-
+    private lateinit var currentAnimal: Animal
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +30,8 @@ class PetDetailFragment : Fragment() {
     ): View? {
 
         val rootView = inflater.inflate(R.layout.fragment_pet_detail, container, false)
+
+        val btnDelete = rootView.findViewById<Button>(R.id.deleteButton)
 
         val db = Room.databaseBuilder(
             requireContext(),
@@ -43,6 +47,11 @@ class PetDetailFragment : Fragment() {
 
 
         loadAnimalDetails(animalId, rootView)
+
+        btnDelete.setOnClickListener {
+            deleteAnimal(currentAnimal)
+            openSelectionFragment()
+        }
 
         return rootView
     }
@@ -71,7 +80,20 @@ class PetDetailFragment : Fragment() {
                         .load(animal.image)
                         .into(animalImage)
                 }
+                currentAnimal = animal
             }
         }
+    }
+
+    private fun deleteAnimal(animal: Animal){
+        animalViewModel.deleteAnimal(animal)
+    }
+
+    private fun openSelectionFragment() {
+
+        val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, SelectionFragment())
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 }
