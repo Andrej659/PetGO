@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- ScrollView to allow scrolling if content overflows -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Image of the animal -->
+            <ImageView
+                android:id="@+id/animalImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_launcher_background"
+                android:contentDescription="Animal Image"
+                android:scaleType="centerCrop" />
+
+            <!-- Name of the animal -->
+            <TextView
+                android:id="@+id/animalNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ime:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/animalName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="neko ime"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Type of the animal -->
+            <TextView
+                android:id="@+id/animalTypeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tip:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/animalType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="pas"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Age of the animal -->
+            <TextView
+                android:id="@+id/animalAgeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dob:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/animalAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Date when the animal was added -->
+            <TextView
+                android:id="@+id/animalDateAddedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Datum dodavanja:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/animalDateAdded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12/03/2025"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Gender of the animal -->
+            <TextView
+                android:id="@+id/animalGenderLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spol:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/animalGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mužjak"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

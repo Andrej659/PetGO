@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- ScrollView to allow scrolling if content overflows -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Name input -->
+            <TextView
+                android:id="@+id/petNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ime:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/petName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Unesite ime ljubimca"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:inputType="text" />
+
+            <!-- Type of the animal -->
+            <TextView
+                android:id="@+id/petTypeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tip:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/petType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Unesite tip ljubimca"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:inputType="text" />
+
+            <!-- Age of the animal -->
+            <TextView
+                android:id="@+id/petAgeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dob:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/petAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Unesite dob ljubimca"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:inputType="number" />
+
+            <!-- Gender Spinner (ComboBox) -->
+            <TextView
+                android:id="@+id/petGenderLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spol:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <Spinner
+                android:id="@+id/petGenderSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <!-- Date Added -->
+            <TextView
+                android:id="@+id/petDateAddedLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Datum dodavanja:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/petDateAdded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Odaberite datum"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:focusable="false"
+                android:clickable="true" />
+
+
+            <!-- Image selection Button -->
+            <TextView
+                android:id="@+id/petImageLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slika:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <Button
+                android:id="@+id/selectImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Odaberite sliku"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Save button -->
+            <Button
+                android:id="@+id/savePetButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Spremi"
+                android:textSize="16sp"
+                android:layout_marginTop="32dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
