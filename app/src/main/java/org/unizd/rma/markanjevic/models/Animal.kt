@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey
 data class Animal(
 
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "type") val type: String,
-    @ColumnInfo(name = "age") val age: Int,
-    @ColumnInfo(name = "image") val image: String,
-    @ColumnInfo(name = "dateAdded") val dateAdded: String,
-    @ColumnInfo(name = "gender") val gender: String,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "type") var type: String,
+    @ColumnInfo(name = "age") var age: Int,
+    @ColumnInfo(name = "image") var image: String,
+    @ColumnInfo(name = "dateAdded") var dateAdded: String,
+    @ColumnInfo(name = "gender") var gender: String,
 )

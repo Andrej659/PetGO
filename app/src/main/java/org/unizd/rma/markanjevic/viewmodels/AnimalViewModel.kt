@@ -26,4 +26,10 @@ class AnimalViewModel(private val animalDao: AnimalDao) : ViewModel() {
             animalDao.deleteAnimal(animal)
         }
     }
+
+    fun updateAnimal(animal: Animal) {
+        viewModelScope.launch() {
+            animalDao.updateAnimal(animal)
+        }
+    }
 }

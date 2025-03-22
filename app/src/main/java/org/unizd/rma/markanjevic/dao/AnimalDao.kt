@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Delete
+import androidx.room.Update
 import org.unizd.rma.markanjevic.models.Animal
 @Dao
 interface AnimalDao {
@@ -23,4 +24,7 @@ interface AnimalDao {
 
     @Delete
     suspend fun deleteAnimal(animal: Animal)
+
+    @Update
+    suspend fun updateAnimal(animal: Animal)
 }

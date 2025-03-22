@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- ScrollView to allow scrolling if content overflows -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +16,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Image of the animal -->
             <ImageView
                 android:id="@+id/animalImage"
                 android:layout_width="match_parent"
@@ -25,9 +23,12 @@
                 android:layout_gravity="center"
                 android:src="@drawable/ic_launcher_background"
                 android:contentDescription="Animal Image"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:clickable="false"
+                android:focusable="false"
+                android:onClick="onImageClick" />
 
-            <!-- Name of the animal -->
+
             <TextView
                 android:id="@+id/animalNameLabel"
                 android:layout_width="wrap_content"
@@ -37,15 +38,17 @@
                 android:textStyle="bold"
                 android:layout_marginTop="16dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/animalName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="neko ime"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:focusable="false"
+                android:enabled="false"
+                android:focusableInTouchMode="false"/>
 
-            <!-- Type of the animal -->
             <TextView
                 android:id="@+id/animalTypeLabel"
                 android:layout_width="wrap_content"
@@ -55,15 +58,17 @@
                 android:textStyle="bold"
                 android:layout_marginTop="16dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/animalType"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="pas"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:focusable="false"
+                android:enabled="false"
+                android:focusableInTouchMode="false"/>
 
-            <!-- Age of the animal -->
             <TextView
                 android:id="@+id/animalAgeLabel"
                 android:layout_width="wrap_content"
@@ -73,15 +78,17 @@
                 android:textStyle="bold"
                 android:layout_marginTop="16dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/animalAge"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:focusable="false"
+                android:enabled="false"
+                android:focusableInTouchMode="false"/>
 
-            <!-- Date when the animal was added -->
             <TextView
                 android:id="@+id/animalDateAddedLabel"
                 android:layout_width="wrap_content"
@@ -91,15 +98,16 @@
                 android:textStyle="bold"
                 android:layout_marginTop="16dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/animalDateAdded"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="12/03/2025"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:focusable="false"
+                android:enabled="false" />
 
-            <!-- Gender of the animal -->
             <TextView
                 android:id="@+id/animalGenderLabel"
                 android:layout_width="wrap_content"
@@ -113,22 +121,49 @@
                 android:id="@+id/animalGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="mužjak"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp" />
 
-            <!-- Button to trigger method -->
-            <Button
-                android:id="@+id/deleteButton"
-                android:layout_width="200dp"
+            <Spinner
+                android:id="@+id/genderSpinner"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@android:color/holo_red_dark"
-                android:textColor="@android:color/white"
-                android:onClick="onActionButtonClick" />
+                android:visibility="gone"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="16dp" />
+
+                <Button
+                    android:id="@+id/editButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:backgroundTint="@android:color/black"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/listButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="List"
+                    android:backgroundTint="@android:color/black"
+                    android:textColor="@android:color/white"
+                    android:layout_marginStart="16dp" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>
