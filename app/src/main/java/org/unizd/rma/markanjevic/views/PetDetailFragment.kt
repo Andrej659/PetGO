@@ -69,11 +69,12 @@ class PetDetailFragment : Fragment() {
 
         val animalDao = db.animalDao()
         val factory = AnimalViewModelFactory(animalDao)
-        animalViewModel = ViewModelProvider(this, factory).get(AnimalViewModel::class.java)
+        animalViewModel = ViewModelProvider(this, factory)[AnimalViewModel::class.java]
 
         animalId = arguments?.getInt("PET_ID") ?: 0
 
         loadAnimalDetails(animalId)
+        spinnerSetup()
 
         btnEdit.setOnClickListener {
             toggleEditMode()
@@ -92,9 +93,6 @@ class PetDetailFragment : Fragment() {
             showDatePickerDialog()
         }
 
-        btnEdit.setOnClickListener {
-            toggleEditMode()
-        }
         btnList.setOnClickListener {
             openListFragment()
         }
@@ -109,7 +107,7 @@ class PetDetailFragment : Fragment() {
                 animalType.setText(animal.type)
                 animalAge.setText(animal.age.toString())
                 animalDateAdded.setText(animal.dateAdded)
-                animalGender.setText(animal.gender)
+                animalGender.text = animal.gender
 
                 if (animal.image.isNotEmpty()) {
                     Glide.with(requireContext())
@@ -146,25 +144,28 @@ class PetDetailFragment : Fragment() {
         animalType.isEnabled = editable
         animalAge.isEnabled = editable
         animalDateAdded.isEnabled = editable
-        animalGender.isEnabled = editable
 
         animalImage.isFocusable = editable
         animalName.isFocusable = editable
         animalType.isFocusable = editable
         animalAge.isFocusable = editable
         animalDateAdded.isFocusable = editable
-        animalGender.isFocusable = editable
 
         animalName.isFocusableInTouchMode = editable
         animalType.isFocusableInTouchMode = editable
         animalAge.isFocusableInTouchMode = editable
-        animalGender.isFocusableInTouchMode = editable
 
-        spinnerSetup()
     }
 
     private fun toggleEditMode() {
+
         val isEditable = animalName.isEnabled
+
+        if (animalName.text.toString().isEmpty() || animalType.text.toString().isEmpty() || animalDateAdded.text.toString().isEmpty() || animalGender.text.toString().isEmpty() || animalAge.text.toString().isEmpty()) {
+            Toast.makeText(requireContext(), "Molimo unesite sve podatke", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         setFieldsEditable(!isEditable)
 
         if (!isEditable) {
@@ -180,11 +181,12 @@ class PetDetailFragment : Fragment() {
     }
 
     private fun saveAnimalDetails() {
+
         currentAnimal.name = animalName.text.toString()
         currentAnimal.type = animalType.text.toString()
         currentAnimal.age = animalAge.text.toString().toInt()
         currentAnimal.dateAdded = animalDateAdded.text.toString()
-        currentAnimal.gender = animalGender.text.toString()
+        currentAnimal.gender = genderSpinner.selectedItem.toString()
 
         animalViewModel.updateAnimal(currentAnimal)
     }
@@ -234,12 +236,12 @@ class PetDetailFragment : Fragment() {
         val datePicker = DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
-                calendar.set(year, month, dayOfMonth)
+                calendar[year, month] = dayOfMonth
                 animalDateAdded.setText(dateFormat.format(calendar.time))
             },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
+            calendar[Calendar.YEAR],
+            calendar[Calendar.MONTH],
+            calendar[Calendar.DAY_OF_MONTH]
         )
         datePicker.show()
     }

@@ -53,7 +53,7 @@ class PetListFragment : Fragment() {
 
         val animalDao = db.animalDao()
         val factory = AnimalViewModelFactory(animalDao)
-        animalViewModel = ViewModelProvider(this, factory).get(AnimalViewModel::class.java)
+        animalViewModel = ViewModelProvider(this, factory)[AnimalViewModel::class.java]
 
         animalViewModel.animals.observe(viewLifecycleOwner, Observer { animals ->
             setUpAdapter(animals)

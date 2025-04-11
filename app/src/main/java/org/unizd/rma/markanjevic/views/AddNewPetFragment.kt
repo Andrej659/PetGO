@@ -41,9 +41,8 @@ class AddNewPetFragment : Fragment() {
     private lateinit var petDateAdded: EditText
     private lateinit var selectImageButton: Button
     private lateinit var savePetButton: Button
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null
     private lateinit var animalViewModel: AnimalViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +57,7 @@ class AddNewPetFragment : Fragment() {
 
         val animalDao = db.animalDao()
         val factory = AnimalViewModelFactory(animalDao)
-        animalViewModel = ViewModelProvider(this, factory).get(AnimalViewModel::class.java)
+        animalViewModel = ViewModelProvider(this, factory)[AnimalViewModel::class.java]
 
         petName = view.findViewById(R.id.petName)
         petType = view.findViewById(R.id.petType)
@@ -87,7 +86,6 @@ class AddNewPetFragment : Fragment() {
 
         savePetButton.setOnClickListener {
             savePet()
-            openSelectionFragment()
         }
 
         return view
@@ -130,6 +128,7 @@ class AddNewPetFragment : Fragment() {
     }
 
     private fun savePet() {
+
         val name = petName.text.toString().trim()
         val type = petType.text.toString().trim()
         val age = petAge.text.toString().toIntOrNull() ?: 0
@@ -137,7 +136,7 @@ class AddNewPetFragment : Fragment() {
         val dateAdded = petDateAdded.text.toString().trim()
         val imagePath = saveImageFromUri(imageUri)
 
-        if (name.isEmpty() || type.isEmpty() || dateAdded.isEmpty() || gender.isEmpty() || imagePath.isEmpty()) {
+        if (name.isEmpty() || type.isEmpty() || dateAdded.isEmpty() || imagePath.isEmpty()) {
             Toast.makeText(requireContext(), "Molimo unesite sve podatke", Toast.LENGTH_SHORT).show()
             return
         }
@@ -153,6 +152,7 @@ class AddNewPetFragment : Fragment() {
         )
 
         savePetToDatabase(newPet)
+        openSelectionFragment()
     }
 
     private fun savePetToDatabase(pet: Animal) {
@@ -167,12 +167,12 @@ class AddNewPetFragment : Fragment() {
         val datePicker = DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
-                calendar.set(year, month, dayOfMonth)
+                calendar[year, month] = dayOfMonth
                 petDateAdded.setText(dateFormat.format(calendar.time))
             },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
+            calendar[Calendar.YEAR],
+            calendar[Calendar.MONTH],
+            calendar[Calendar.DAY_OF_MONTH]
         )
         datePicker.show()
     }
@@ -185,11 +185,19 @@ class AddNewPetFragment : Fragment() {
         fragmentTransaction.commit()
     }
 
-    private fun saveImageFromUri(uri: Uri): String {
+    private fun saveImageFromUri(uri: Uri?): String {
+
+        var newUrl: Uri
+
+        if (uri != null){
+            newUrl = uri
+        }else{
+            return ""
+        }
 
         val context = requireContext()
         try {
-            val inputStream = context.contentResolver.openInputStream(uri)
+            val inputStream = context.contentResolver.openInputStream(newUrl)
             val bitmap = BitmapFactory.decodeStream(inputStream)
             inputStream?.close()
 
