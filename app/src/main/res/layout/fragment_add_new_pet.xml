@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CEFDC5"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -22,67 +23,67 @@
                 android:id="@+id/petNameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Ime:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/petName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Unesite ime ljubimca"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:inputType="text" />
+                android:hint="Unesite ime ljubimca"
+                android:inputType="text"
+                android:textSize="16sp" />
 
             <!-- Type of the animal -->
             <TextView
                 android:id="@+id/petTypeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Tip:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/petType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Unesite tip ljubimca"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:inputType="text" />
+                android:hint="Unesite tip ljubimca"
+                android:inputType="text"
+                android:textSize="16sp" />
 
             <!-- Age of the animal -->
             <TextView
                 android:id="@+id/petAgeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Dob:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/petAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Unesite dob ljubimca"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:inputType="number" />
+                android:hint="Unesite dob ljubimca"
+                android:inputType="number"
+                android:textSize="16sp" />
 
             <!-- Gender Spinner (ComboBox) -->
             <TextView
                 android:id="@+id/petGenderLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Spol:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/petGenderSpinner"
@@ -95,20 +96,20 @@
                 android:id="@+id/petDateAddedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Datum dodavanja:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/petDateAdded"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Odaberite datum"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
+                android:clickable="true"
                 android:focusable="false"
-                android:clickable="true" />
+                android:hint="Odaberite datum"
+                android:textSize="16sp" />
 
 
             <!-- Image selection Button -->
@@ -116,27 +117,29 @@
                 android:id="@+id/petImageLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Slika:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/selectImageButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#39614F"
                 android:text="Odaberite sliku"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:textSize="16sp" />
 
             <!-- Save button -->
             <Button
                 android:id="@+id/savePetButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#39614F"
                 android:text="Spremi"
-                android:textSize="16sp"
-                android:layout_marginTop="32dp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>

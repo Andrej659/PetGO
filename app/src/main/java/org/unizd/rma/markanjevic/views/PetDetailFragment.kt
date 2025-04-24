@@ -172,6 +172,11 @@ class PetDetailFragment : Fragment() {
             btnEdit.text = "Save"
             animalGender.visibility = View.GONE
             genderSpinner.visibility = View.VISIBLE
+            val genderArray = resources.getStringArray(R.array.gender_array)
+            val genderIndex = genderArray.indexOf(currentAnimal.gender)
+            if (genderIndex >= 0) {
+                genderSpinner.setSelection(genderIndex)
+            }
         } else {
             btnEdit.text = "Edit"
             animalGender.visibility = View.VISIBLE

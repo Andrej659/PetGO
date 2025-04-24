@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CEFDC5"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -10,20 +11,20 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#39614F"
         android:text="Back"
-        android:backgroundTint="@android:color/black"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp"/>
+        android:textColor="@android:color/white" />
 
     <!-- Title for the fragment -->
     <TextView
         android:id="@+id/petListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Lista ljubimaca"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:textStyle="bold" />
 
     <!-- RecyclerView to display the list of animals -->
     <androidx.recyclerview.widget.RecyclerView

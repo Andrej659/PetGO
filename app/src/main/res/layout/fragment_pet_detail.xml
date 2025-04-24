@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CEFDC5"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -21,147 +22,147 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher_background"
-                android:contentDescription="Animal Image"
-                android:scaleType="centerCrop"
                 android:clickable="false"
+                android:contentDescription="Animal Image"
                 android:focusable="false"
-                android:onClick="onImageClick" />
+                android:onClick="onImageClick"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background" />
 
 
             <TextView
                 android:id="@+id/animalNameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Ime:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/animalName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="neko ime"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:focusable="false"
                 android:enabled="false"
-                android:focusableInTouchMode="false"/>
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="neko ime"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/animalTypeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Tip:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/animalType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="pas"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:focusable="false"
                 android:enabled="false"
-                android:focusableInTouchMode="false"/>
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="pas"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/animalAgeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Dob:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/animalAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="5"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:focusable="false"
                 android:enabled="false"
-                android:focusableInTouchMode="false"/>
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="5"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/animalDateAddedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Datum dodavanja:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/animalDateAdded"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="12/03/2025"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
+                android:enabled="false"
                 android:focusable="false"
-                android:enabled="false" />
+                android:text="12/03/2025"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/animalGenderLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Spol:"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/animalGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="8dp"
+                android:textSize="16sp" />
 
             <Spinner
                 android:id="@+id/genderSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/deleteButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delete"
+                    android:layout_marginEnd="16dp"
                     android:backgroundTint="@android:color/holo_red_dark"
-                    android:textColor="@android:color/white"
-                    android:layout_marginEnd="16dp" />
+                    android:text="Delete"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/editButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#39614F"
                     android:text="Edit"
-                    android:backgroundTint="@android:color/black"
                     android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/listButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="#39614F"
                     android:text="List"
-                    android:backgroundTint="@android:color/black"
-                    android:textColor="@android:color/white"
-                    android:layout_marginStart="16dp" />
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
         </LinearLayout>

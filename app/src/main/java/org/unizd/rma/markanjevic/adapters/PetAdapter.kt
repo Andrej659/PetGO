@@ -15,7 +15,8 @@ class PetAdapter(
     private val listener: OnPetClickListener
 ) : RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
 
-    interface OnPetClickListener {
+
+    fun interface OnPetClickListener {
         fun onPetClick(petId: Int)
     }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CEFDC5"
     tools:context="org.unizd.rma.markanjevic.views.MainFragment">
 
     <!-- Naslov -->
@@ -12,23 +13,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to PetGO"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/buttonOpenSelection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <!-- Gumb koji otvara SelectionFragment -->
     <Button
         android:id="@+id/buttonOpenSelection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#39614F"
         android:text="Open Selection"
-        app:layout_constraintTop_toBottomOf="@id/textViewWelcome"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewWelcome"
+        app:layout_constraintVertical_chainStyle="packed" />
 </androidx.constraintlayout.widget.ConstraintLayout>

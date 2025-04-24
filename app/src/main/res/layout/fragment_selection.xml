@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CEFDC5"
     tools:context="org.unizd.rma.markanjevic.views.SelectionFragment">
 
 
@@ -11,23 +12,25 @@
         android:id="@+id/buttonOpenListOfPets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#39614F"
         android:text="Go to Pet List"
         app:layout_constraintBottom_toTopOf="@id/fabCreateNewAnimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="30dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- FAB gumb za otvaranje CreateNewAnimalFragment -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCreateNewAnimal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_input_add"
-        android:contentDescription="Add a new pet"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:contentDescription="Add a new pet"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="#39614F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

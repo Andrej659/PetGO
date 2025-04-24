@@ -22,9 +22,11 @@ interface AnimalDao {
     @Query("SELECT * FROM animals WHERE id = :id")
     fun getAnimalById(id: Int): LiveData<Animal>
 
+    //Delete an animal from the database
     @Delete
     suspend fun deleteAnimal(animal: Animal)
 
+    //Update the data on the animal in the database
     @Update
     suspend fun updateAnimal(animal: Animal)
 }
