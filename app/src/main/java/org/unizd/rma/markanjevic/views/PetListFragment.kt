@@ -18,6 +18,10 @@ import org.unizd.rma.markanjevic.database.AppDatabase
 import org.unizd.rma.markanjevic.viewmodels.AnimalViewModel
 import org.unizd.rma.markanjevic.viewmodels.factory.AnimalViewModelFactory
 
+/**
+ * Fragment koji prikazuje listu svih ljubimaca iz baze podataka.
+ * Omogućuje pregled detalja svakog ljubimca klikom na pojedini red u RecyclerView-u.
+ */
 class PetListFragment : Fragment() {
 
     private lateinit var petRecyclerView: RecyclerView
@@ -25,6 +29,9 @@ class PetListFragment : Fragment() {
     private lateinit var animalViewModel: AnimalViewModel
     private lateinit var btnBack: Button
 
+    /**
+     * Kreira view za fragment i postavlja osnovne UI komponente.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +42,7 @@ class PetListFragment : Fragment() {
         btnBack = rootView.findViewById(R.id.backButton)
         petRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // Učitavanje podataka iz baze
         loadPetData()
 
         btnBack.setOnClickListener {
@@ -44,6 +52,9 @@ class PetListFragment : Fragment() {
         return rootView
     }
 
+    /**
+     * Učitava podatke o ljubimcima iz baze putem ViewModel-a i prikazuje ih u RecyclerView-u.
+     */
     private fun loadPetData() {
 
         val db = Room.databaseBuilder(
@@ -61,6 +72,10 @@ class PetListFragment : Fragment() {
         })
     }
 
+    /**
+     * Postavlja adapter za RecyclerView s dohvaćenim životinjama.
+     * Također se definira ponašanje na klik pojedinog ljubimca.
+     */
     private fun setUpAdapter(animals: List<Animal>){
 
         petAdapter = PetAdapter(animals, object : PetAdapter.OnPetClickListener {
@@ -80,6 +95,9 @@ class PetListFragment : Fragment() {
         })
     }
 
+    /**
+     * Otvara početni fragment s opcijama (izbornik).
+     */
     private fun openSelectionFragment() {
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, SelectionFragment())

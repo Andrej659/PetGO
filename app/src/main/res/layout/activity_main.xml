@@ -7,7 +7,6 @@
     android:background="#CEFDC5"
     tools:context=".MainActivity">
 
-    <!-- FrameLayout koji će držati fragmente -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"

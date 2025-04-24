@@ -32,6 +32,12 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+/**
+ * Fragment za dodavanje novog ljubimca u aplikaciju.
+ *
+ * Ovaj fragment omogućuje korisnicima unos informacija o ljubimcima, kao što su ime, tip, dob, spol, datum dodavanja
+ * i slika ljubimca. Također omogućava odabir slike pomoću kamere ili galerije, a unesene podatke sprema u bazu podataka.
+ */
 class AddNewPetFragment : Fragment() {
 
     private lateinit var petName: EditText
@@ -50,6 +56,7 @@ class AddNewPetFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_add_new_pet, container, false)
 
+        // Postavljanje Room baze podataka i AnimalViewModel-a
         val db = Room.databaseBuilder(
             requireContext(),
             AppDatabase::class.java, "animals"
@@ -59,6 +66,7 @@ class AddNewPetFragment : Fragment() {
         val factory = AnimalViewModelFactory(animalDao)
         animalViewModel = ViewModelProvider(this, factory)[AnimalViewModel::class.java]
 
+        // Inicijalizacija UI komponenti
         petName = view.findViewById(R.id.petName)
         petType = view.findViewById(R.id.petType)
         petAge = view.findViewById(R.id.petAge)
@@ -67,6 +75,7 @@ class AddNewPetFragment : Fragment() {
         selectImageButton = view.findViewById(R.id.selectImageButton)
         savePetButton = view.findViewById(R.id.savePetButton)
 
+        // Postavljanje adaptera za spinner (spol ljubimca)
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.gender_array,
@@ -91,6 +100,7 @@ class AddNewPetFragment : Fragment() {
         return view
     }
 
+    // Aktivnosti za kameru i galeriju (koristeći ActivityResultContracts)
     private val cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
         if (success) {
             Toast.makeText(requireContext(), "Slika spremljena", Toast.LENGTH_SHORT).show()
@@ -104,6 +114,9 @@ class AddNewPetFragment : Fragment() {
         }
     }
 
+    /**
+     * Prikazuje dijalog za odabir izvora slike (kamera ili galerija).
+     */
     private fun showImagePickerDialog() {
         val options = arrayOf("Slikaj kamerom", "Odaberi iz galerije", "Odustani")
         AlertDialog.Builder(requireContext())
@@ -117,16 +130,25 @@ class AddNewPetFragment : Fragment() {
             .show()
     }
 
+    /**
+     * Pokreće kameru za snimanje slike.
+     */
     private fun openCamera() {
         val imageFile = File(requireContext().filesDir, "pet_image_${System.currentTimeMillis()}.jpg")
         imageUri = FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.provider", imageFile)
         cameraLauncher.launch(imageUri)
     }
 
+    /**
+     * Otvara galeriju za odabir slike.
+     */
     private fun openGallery() {
         galleryLauncher.launch("image/*")
     }
 
+    /**
+     * Spremanje podataka o ljubimcu u bazu podataka.
+     */
     private fun savePet() {
 
         val name = petName.text.toString().trim()
@@ -155,11 +177,18 @@ class AddNewPetFragment : Fragment() {
         openSelectionFragment()
     }
 
+    /**
+     * Spremanje ljubimca u bazu podataka.
+     */
     private fun savePetToDatabase(pet: Animal) {
         Toast.makeText(requireContext(), "Životinja spremljena: ${pet.name}", Toast.LENGTH_SHORT).show()
         animalViewModel.insertAnimal(pet)
     }
 
+
+    /**
+     * Prikazuje DatePicker dijalog za odabir datuma.
+     */
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -177,6 +206,10 @@ class AddNewPetFragment : Fragment() {
         datePicker.show()
     }
 
+
+    /**
+     * Otvara fragment za odabir ljubimaca nakon što je novi ljubimac spremljen.
+     */
     private fun openSelectionFragment() {
 
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -185,6 +218,9 @@ class AddNewPetFragment : Fragment() {
         fragmentTransaction.commit()
     }
 
+    /**
+     * Spremanje slike s URI-ja u internu pohranu.
+     */
     private fun saveImageFromUri(uri: Uri?): String {
 
         var newUrl: Uri
@@ -212,7 +248,9 @@ class AddNewPetFragment : Fragment() {
         return ""
     }
 
-
+    /**
+     * Spremanje slike u internu pohranu.
+     */
     private fun saveImageToInternalStorage(context: Context, bitmap: Bitmap, fileName: String): String {
         val directory = File(context.filesDir, "pet_images")
         if (!directory.exists()) {

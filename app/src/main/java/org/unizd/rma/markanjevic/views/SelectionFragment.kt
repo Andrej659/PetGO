@@ -7,8 +7,16 @@ import android.widget.Button
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.unizd.rma.markanjevic.R
 
+/**
+ * Fragment koji predstavlja početni izbornik aplikacije.
+ * Korisnik ovdje može birati između dodavanja novog ljubimca ili pregleda postojećih.
+ */
 class SelectionFragment : Fragment(R.layout.fragment_selection) {
 
+    /**
+     * Metoda koja se poziva kada je view fragmenta kreiran.
+     * Postavlja akcije na gumbe za otvaranje odgovarajućih fragmenata.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -24,6 +32,9 @@ class SelectionFragment : Fragment(R.layout.fragment_selection) {
         }
     }
 
+    /**
+     * Otvara fragment za dodavanje novog ljubimca.
+     */
     private fun openCreateNewAnimalFragment() {
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, AddNewPetFragment())
@@ -31,6 +42,9 @@ class SelectionFragment : Fragment(R.layout.fragment_selection) {
         fragmentTransaction.commit()
     }
 
+    /**
+     * Otvara fragment s listom postojećih ljubimaca.
+     */
     private fun openListOfPetsFragment() {
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, PetListFragment())

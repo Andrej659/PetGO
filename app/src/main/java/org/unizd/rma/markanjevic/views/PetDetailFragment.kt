@@ -24,6 +24,10 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
+/**
+ * Fragment za prikaz i uređivanje detalja o odabranoj životinji.
+ * Omogućuje prikaz, ažuriranje, brisanje i dodavanje slike te promjenu spola.
+ */
 class PetDetailFragment : Fragment() {
 
     private var animalId: Int = 0
@@ -100,6 +104,9 @@ class PetDetailFragment : Fragment() {
         return rootView
     }
 
+    /**
+     * Učitavanje podataka o životinji i prikaz u UI.
+     */
     private fun loadAnimalDetails(animalId: Int) {
         animalViewModel.getAnimalById(animalId).observe(viewLifecycleOwner) { animal ->
             animal?.let {
@@ -119,10 +126,18 @@ class PetDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Briše životinju iz baze podataka
+     *
+     * @param animal Životinja koja se briše
+     */
     private fun deleteAnimal(animal: Animal) {
         animalViewModel.deleteAnimal(animal)
     }
 
+    /**
+     * Otvara fragment za odabir nove životinje
+     */
     private fun openSelectionFragment() {
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, SelectionFragment())
@@ -130,6 +145,9 @@ class PetDetailFragment : Fragment() {
         fragmentTransaction.commit()
     }
 
+    /**
+     * Otvara listu svih životinja
+     */
     private fun openListFragment() {
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, PetListFragment())
@@ -137,6 +155,9 @@ class PetDetailFragment : Fragment() {
         fragmentTransaction.commit()
     }
 
+    /**
+     * Postavlja polja kao uređivačka ili samo za čitanje
+     */
     private fun setFieldsEditable(editable: Boolean) {
 
         animalImage.isEnabled = editable
@@ -157,6 +178,9 @@ class PetDetailFragment : Fragment() {
 
     }
 
+    /**
+     * Uključuje/isključuje način uređivanja i sprema promjene
+     */
     private fun toggleEditMode() {
 
         val isEditable = animalName.isEnabled
@@ -185,6 +209,9 @@ class PetDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Sprema uređene podatke o životinji u bazu.
+     */
     private fun saveAnimalDetails() {
 
         currentAnimal.name = animalName.text.toString()
@@ -196,6 +223,7 @@ class PetDetailFragment : Fragment() {
         animalViewModel.updateAnimal(currentAnimal)
     }
 
+    // Pokreće kameru
     private val cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
         if (success) {
             animalImage.setImageURI(imageUri)
@@ -203,6 +231,7 @@ class PetDetailFragment : Fragment() {
         }
     }
 
+    // Pokreće galeriju
     private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             imageUri = uri
@@ -211,6 +240,9 @@ class PetDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * Otvara dijalog za izbor slike (kamera ili galerija).
+     */
     private fun showImagePickerDialog() {
         val options = arrayOf("Slikaj kamerom", "Odaberi iz galerije")
         AlertDialog.Builder(requireContext())
@@ -234,6 +266,9 @@ class PetDetailFragment : Fragment() {
         galleryLauncher.launch("image/*")
     }
 
+    /**
+     * Otvara dijalog za odabir datuma.
+     */
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -251,6 +286,9 @@ class PetDetailFragment : Fragment() {
         datePicker.show()
     }
 
+    /**
+     * Postavlja adapter za spinner spola
+     */
     private fun spinnerSetup(){
 
         ArrayAdapter.createFromResource(
