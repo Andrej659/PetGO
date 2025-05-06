@@ -243,7 +243,6 @@ class PetDetailFragment : Fragment() {
         currentAnimal.age = animalAge.text.toString().toInt()
         currentAnimal.dateAdded = animalDateAdded.text.toString()
         currentAnimal.gender = genderSpinner.selectedItem.toString()
-        currentAnimal.image = saveImageFromUri(imageUri)
 
         animalViewModel.updateAnimal(currentAnimal)
     }
