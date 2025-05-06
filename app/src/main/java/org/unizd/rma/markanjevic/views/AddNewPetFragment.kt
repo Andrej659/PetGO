@@ -1,11 +1,16 @@
 package org.unizd.rma.markanjevic.views
 
+import android.Manifest
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +20,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -49,6 +56,8 @@ class AddNewPetFragment : Fragment() {
     private lateinit var savePetButton: Button
     private var imageUri: Uri? = null
     private lateinit var animalViewModel: AnimalViewModel
+    private lateinit var cameraPermissionLauncher: ActivityResultLauncher<String>
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -97,15 +106,19 @@ class AddNewPetFragment : Fragment() {
             savePet()
         }
 
+        cameraPermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                openCamera()
+            } else {
+                Toast.makeText(requireContext(), "Kamera dozvola odbijena", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         return view
     }
 
-    // Aktivnosti za kameru i galeriju (koristeći ActivityResultContracts)
-    private val cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-        if (success) {
-            Toast.makeText(requireContext(), "Slika spremljena", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
@@ -123,7 +136,7 @@ class AddNewPetFragment : Fragment() {
             .setTitle("Odaberite opciju")
             .setItems(options) { _, which ->
                 when (which) {
-                    0 -> openCamera()
+                    0 -> checkCameraPermissionAndOpenCamera()
                     1 -> openGallery()
                 }
             }
@@ -134,9 +147,30 @@ class AddNewPetFragment : Fragment() {
      * Pokreće kameru za snimanje slike.
      */
     private fun openCamera() {
-        val imageFile = File(requireContext().filesDir, "pet_image_${System.currentTimeMillis()}.jpg")
-        imageUri = FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.provider", imageFile)
-        cameraLauncher.launch(imageUri)
+        val imageFile = File(
+            requireContext().getExternalFilesDir(null),
+            "pet_image_${System.currentTimeMillis()}.jpg"
+        )
+        imageUri = FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.provider",
+            imageFile
+        )
+
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+
+        cameraIntentLauncher.launch(cameraIntent)
+    }
+
+    private val cameraIntentLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            Toast.makeText(requireContext(), "Slika spremljena", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Snimanje nije uspjelo", Toast.LENGTH_SHORT).show()
+        }
     }
 
     /**
@@ -266,6 +300,18 @@ class AddNewPetFragment : Fragment() {
         } catch (e: IOException) {
             e.printStackTrace()
             ""
+        }
+    }
+
+    private fun checkCameraPermissionAndOpenCamera() {
+        when {
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED -> {
+                openCamera()
+            }
+            else -> {
+                cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
         }
     }
 }
